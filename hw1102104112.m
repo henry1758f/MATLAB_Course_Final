@@ -126,7 +126,7 @@ function pushbutton_drawwave_Callback(hObject, eventdata, handles)
 f = str2double(get(handles.edit1,'String'));
 %disp(f)
 x = linspace(0,1/f*3,10000);
-T = get(handles.uitable1,'Data')
+T = get(handles.uitable1,'Data');
 % T1(1) = T{1,1}
 % T1(2) = T{2,1}
 % T1(3) = T{3,1}
@@ -139,11 +139,11 @@ T = get(handles.uitable1,'Data')
 % T1(10) = T{10,1}
 % T1(11) = T{11,1}
 for i=1:11
-    temp = T{i,1}
+    temp = T{i,1};
     if(isempty(temp))
-        T1(i) = 0
+        T1(i) = 0;
     else
-        T1(i) = T{i,1}
+        T1(i) = T{i,1};
     end
 end
 y1 = T1(1);
@@ -158,8 +158,8 @@ y9 = T1(9)*sin(8*2*pi*x*f);
 y10 = T1(10)*sin(9*2*pi*x*f);
 y11 = T1(11)*sin(10*2*pi*x*f);
 all = y1+y2+y3+y4+y5+y6+y7+y8+y9+y10+y11;
-axes(handles.axes2)
-plot(x,all)
+axes(handles.axes2);
+plot(x,all);
 
 % --- Executes on button press in pushbutton3.
 function pushbutton3_Callback(hObject, eventdata, handles)
@@ -190,66 +190,71 @@ function pushbutton_savefile_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_savefile (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-[filename,pathname] = uiputfile({'*.jpg';'*.bmp'},'Save the picture');
-path = fullfile(pathname, filename);
-if isequal(filename,0)
-   disp('No File been choose')
+if isequal(get(handles.uipanel_imchange,'Title'),'No File been choose')
+    questdlg('No file!','Error','OK','OK');
+       disp('No file!')
 else
-    
-   if get(handles.popupmenu_imstyle,'value') == 1      %??????
-           picIN = imread(get(handles.uipanel_imchange,'Title'));
-           figure(2)
-           imshow(picIN)
-           saveas(gcf,path)
-           if (~get(handles.checkbox1,'Value'))
-               close(figure(2))
-           end
-       elseif get(handles.popupmenu_imstyle,'value') == 2      %????
-           picIN = imread(get(handles.uipanel_imchange,'Title'));
-           picOUT = rgb2gray(picIN);
-           figure(2)
-           imshow(picOUT)
-           saveas(gcf,path)
-           if (~get(handles.checkbox1,'Value'))
-               close(figure(2))
-           end
-       elseif get(handles.popupmenu_imstyle,'value') == 3      %?G????
-           picIN = imread(get(handles.uipanel_imchange,'Title'));
-           picIN = rgb2gray(picIN);
-           picOUT = roicolor(picIN,100,255);
-           figure(2)
-           imshow(picOUT)
-           saveas(gcf,path)
-           if (~get(handles.checkbox1,'Value'))
-               close(figure(2))
-           end
-       elseif get(handles.popupmenu_imstyle,'value') == 4      %HSV
-           picIN = imread(get(handles.uipanel_imchange,'Title'));
-           picOUT = rgb2hsv(picIN);
-           figure(2)
-           imshow(picOUT)
-           saveas(gcf,path)
-           if (~get(handles.checkbox1,'Value'))
-               close(figure(2))
-           end
-       elseif get(handles.popupmenu_imstyle,'value') == 5      %NISC
-           picIN = imread(get(handles.uipanel_imchange,'Title'));
-           picOUT = rgb2ntsc(picIN);
-           figure(2)
-           imshow(picOUT)
-           saveas(gcf,path)
-           if (~get(handles.checkbox1,'Value'))
-               close(figure(2))
-           end
-       elseif get(handles.popupmenu_imstyle,'value') == 6      %?t?????G
-           picIN = imread(get(handles.uipanel_imchange,'Title'));
-           picOUT = imcomplement(picIN);
-           figure(2)
-           imshow(picOUT)
-           saveas(gcf,path)
-           if (~get(handles.checkbox1,'Value'))
-               close(figure(2))
-           end
+    [filename,pathname] = uiputfile({'*.jpg';'*.bmp'},'Save the picture');
+    path = fullfile(pathname, filename);
+    if isequal(filename,0)
+       disp('No File been choose')
+    else
+
+       if get(handles.popupmenu_imstyle,'value') == 1      %??????
+               picIN = imread(get(handles.uipanel_imchange,'Title'));
+               figure(2)
+               imshow(picIN)
+               saveas(gcf,path)
+               if (~get(handles.checkbox1,'Value'))
+                   close(figure(2))
+               end
+           elseif get(handles.popupmenu_imstyle,'value') == 2      %????
+               picIN = imread(get(handles.uipanel_imchange,'Title'));
+               picOUT = rgb2gray(picIN);
+               figure(2)
+               imshow(picOUT)
+               saveas(gcf,path)
+               if (~get(handles.checkbox1,'Value'))
+                   close(figure(2))
+               end
+           elseif get(handles.popupmenu_imstyle,'value') == 3      %?G????
+               picIN = imread(get(handles.uipanel_imchange,'Title'));
+               picIN = rgb2gray(picIN);
+               picOUT = roicolor(picIN,100,255);
+               figure(2)
+               imshow(picOUT)
+               saveas(gcf,path)
+               if (~get(handles.checkbox1,'Value'))
+                   close(figure(2))
+               end
+           elseif get(handles.popupmenu_imstyle,'value') == 4      %HSV
+               picIN = imread(get(handles.uipanel_imchange,'Title'));
+               picOUT = rgb2hsv(picIN);
+               figure(2)
+               imshow(picOUT)
+               saveas(gcf,path)
+               if (~get(handles.checkbox1,'Value'))
+                   close(figure(2))
+               end
+           elseif get(handles.popupmenu_imstyle,'value') == 5      %NISC
+               picIN = imread(get(handles.uipanel_imchange,'Title'));
+               picOUT = rgb2ntsc(picIN);
+               figure(2)
+               imshow(picOUT)
+               saveas(gcf,path)
+               if (~get(handles.checkbox1,'Value'))
+                   close(figure(2))
+               end
+           elseif get(handles.popupmenu_imstyle,'value') == 6      %?t?????G
+               picIN = imread(get(handles.uipanel_imchange,'Title'));
+               picOUT = imcomplement(picIN);
+               figure(2)
+               imshow(picOUT)
+               saveas(gcf,path)
+               if (~get(handles.checkbox1,'Value'))
+                   close(figure(2))
+               end
+       end
     end
 end
 
@@ -283,6 +288,7 @@ function pushbutton_doit_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 if isequal(get(handles.uipanel_imchange,'Title'),'No File been choose')
+    questdlg('No file!','Error','OK','OK');
        disp('No file!')
    else
        if get(handles.popupmenu_imstyle,'value') == 1      
