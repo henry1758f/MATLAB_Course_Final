@@ -190,6 +190,11 @@ function pushbutton_savefile_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton_savefile (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+import rgb2gray.*
+import rgb2ntsc.*
+import rgb2hsv.*
+import roicolor.*
+import imcomplement.*
 if isequal(get(handles.uipanel_imchange,'Title'),'No File been choose')
     questdlg('No file!','Error','OK','OK');
        disp('No file!')
